@@ -1,19 +1,27 @@
 <template>
     <div id="app">
-        <TopBar></TopBar>
-        <Header></Header>
+        <!-- <TopBar></TopBar>
+        <Header></Header> -->
         <router-view />
     </div>
 </template>
 
 <script>
-import TopBar from "./components/TopBar";
-import Header from "./components/Header";
+// import TopBar from "./components/TopBar";
+// import Header from "./components/Header";
+import { bus } from "./main";
 
 export default {
-    components: {
-        TopBar,
-        Header,
+    updated() {
+        bus.$on("toastr", (payload) => {
+            this.$bvToast.toast(payload.message, {
+                title: payload.title,
+                solid: true,
+                variant: payload.style,
+                autoHideDelay: 5000,
+                appendToast: false
+            });
+        });
     },
 };
 </script>
@@ -24,6 +32,10 @@ export default {
 body {
     font-family: sans-serif;
     color: $second-color;
+}
+
+#app {
+    min-height: 100vh;
 }
 
 a {

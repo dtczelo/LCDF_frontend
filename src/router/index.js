@@ -15,17 +15,35 @@ const routes = [
         name: "Admin",
         component: () => import("../views/Admin.vue"),
     },
-    {
-      path: "/contact",
-      name: "Contact",
-      component: () => import("../components/Footer.vue"),
-  },
+    // {
+    //     path: "/gallerie",
+    //     name: "Gallerie",
+    //     component: () => import("../components/Gallerie.vue"),
+    // },
+    // {
+    //     path: "/about",
+    //     name: "About",
+    //     component: () => import("../components/About.vue"),
+    // },
+    // {
+    //     path: "/contact",
+    //     name: "Contact",
+    //     component: () => import("../components/Footer.vue"),
+    // },
 ];
 
 const router = new VueRouter({
     routes,
-    scrollBehavior() {
-        return { x: 0, y: 0, behavior: 'smooth' };
+    scrollBehavior(to) {
+        if (to.hash) {
+            return {
+                selector: to.hash,
+                offset: { x: 0, y: 80 },
+                behavior: 'smooth'
+            }
+        } else {
+            return { x: 0, y: 0 }
+        }
     },
 });
 

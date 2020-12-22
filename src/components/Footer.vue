@@ -261,7 +261,7 @@ export default {
 }
 
 .contact .email-form button[type="submit"] {
-    background: $third-color;
+    background: $second-color;
     border: 0;
     padding: 10px 24px;
     color: #fff;
@@ -270,7 +270,7 @@ export default {
 }
 
 .contact .email-form button[type="submit"]:hover {
-    background: $fourth-color;
+    background: $third-color;
 }
 
 .contact h2 span {

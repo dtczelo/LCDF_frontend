@@ -1,18 +1,15 @@
 <template>
-    <main class="home">
+    <main id="home" class="home">
+        <TopBar></TopBar>
+        <Header></Header>
         <div class="landing-page">
             <img class="landing-page__logo" :class="{ mounted: isMounted }" src="../assets/images/logo/LCDF-Sans_texte.png" alt="" />
             <img src="../assets/images/greenhouse.jpg" class="landing-page__cover-image" alt="" />
         </div>
-
-        <div class="jumbotron">
-            <div class="container text-center">
-                <h1 class="display-4">Message</h1>
-                <p class="lead">La semaine</p>
-            </div>
-        </div>
+        <About></About>
         <Carousel></Carousel>
         <Menu></Menu>
+        <Gallerie></Gallerie>
         <a @click.prevent="backToTop()" :class="{ backToTopScrolled: isScrolled }" class="back-to-top"
             ><i class="fas fa-chevron-circle-up"></i
         ></a>
@@ -21,16 +18,24 @@
 </template>
 
 <script>
-import Carousel from '../components/Carousel.vue';
+import TopBar from "../components/TopBar";
+import Header from "../components/Header";
+import About from "../components/About";
+import Carousel from "../components/Carousel.vue";
+import Gallerie from "../components/Gallerie";
 import Footer from "../components/Footer";
 import Menu from "../components/Menu";
 
 export default {
     name: "Home",
     components: {
+        TopBar,
+        Header,
+        About,
+        Carousel,
         Menu,
-        Footer,
-        Carousel
+        Gallerie,
+        Footer
     },
     data() {
         return {

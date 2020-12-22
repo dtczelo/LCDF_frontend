@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h2>Nouveautés</h2>
+    <div id="nouveaute" class="container-sm">
+        <h2>Nouveautées</h2>
         <b-carousel
             id="carousel-1"
             v-model="slide"

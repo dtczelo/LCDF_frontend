@@ -1,30 +1,41 @@
 <template>
     <header id="header" :class="{ headerScrolled: isHeaderScrolled }" class="header fixed-top d-flex align-items-center header-transparent">
-        
         <div class="collapse-menu" :class="{ mobileMenuDisplayed: isMobileMenuDisplayed }">
             <div class="collapse-menu-icon" @click.prevent="toggleMobileMenu">
                 <i class="fas fa-times"></i>
             </div>
             <ul>
-                <li class="active" @click.prevent="toggleMobileMenu"><router-link style="text-decoration: none;" to="/">Accueil</router-link></li>
-                <li @click.prevent="toggleMobileMenu"><router-link style="text-decoration: none;" to="/admin">Le chef</router-link></li>
-                <li @click.prevent="toggleMobileMenu"><router-link style="text-decoration: none;" to="/">Gallerie</router-link></li>
-                <li @click.prevent="toggleMobileMenu"><router-link style="text-decoration: none;" to="/contact">Contact</router-link></li>
+                <li @click.prevent="toggleMobileMenu"><router-link style="text-decoration: none;" to="#home">Accueil</router-link></li>
+                <li @click.prevent="toggleMobileMenu"><router-link style="text-decoration: none;" to="#about">Le chef</router-link></li>
+                <li @click.prevent="toggleMobileMenu">
+                    <router-link style="text-decoration: none;" to="#nouveaute">Nouveautées</router-link>
+                </li>
+                <li @click.prevent="toggleMobileMenu"><router-link style="text-decoration: none;" to="#menu">Menu</router-link></li>
+                <li @click.prevent="toggleMobileMenu"><router-link style="text-decoration: none;" to="#gallerie">Gallerie</router-link></li>
+                <li @click.prevent="toggleMobileMenu"><router-link style="text-decoration: none;" to="#contact">Contact</router-link></li>
             </ul>
         </div>
 
         <div class="container d-flex align-items-center w-100">
             <div class="logo mr-auto">
                 <h1 class="text-light">
-                    <router-link style="text-decoration: none;" to="/"><span>La cuisine de François</span></router-link>
+                    <router-link style="text-decoration: none;" to="#home"
+                        >La cuisine <br />
+                        <span class="p-5"> de François</span></router-link
+                    >
                 </h1>
             </div>
+
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
-                    <li class="active"><router-link style="text-decoration: none;" to="/">Accueil</router-link></li>
-                    <li><router-link style="text-decoration: none;" to="/admin">Le chef</router-link></li>
-                    <li><router-link style="text-decoration: none;" to="/">Gallerie</router-link></li>
-                    <li><router-link style="text-decoration: none;" to="/" @click.prevent="scrollToContact">Contact</router-link></li>
+                    <li><router-link style="text-decoration: none;" to="#home">Accueil</router-link></li>
+                    <li><router-link style="text-decoration: none;" to="#about">Le chef</router-link></li>
+                    <li><router-link style="text-decoration: none;" to="#nouveaute">Nouveautées</router-link></li>
+                    <li><router-link style="text-decoration: none;" to="#menu">Menu</router-link></li>
+                    <li><router-link style="text-decoration: none;" to="#gallerie">Gallerie</router-link></li>
+                    <li>
+                        <router-link style="text-decoration: none;" to="#contact" @click.prevent="scrollToContact">Contact</router-link>
+                    </li>
                 </ul>
             </nav>
             <div class="open-menu-icon" @click.prevent="toggleMobileMenu">
@@ -87,10 +98,11 @@ export default {
 .header .logo h1 {
     font-size: 2rem;
     margin: 0;
-    line-height: 1;
     font-weight: 700;
     letter-spacing: 3px;
     font-family: $font-bigTitle;
+    line-height: 2rem;
+    font-style: italic;
 }
 
 .header .logo h1 a,
@@ -129,7 +141,7 @@ export default {
     display: block;
     position: relative;
     color: $light-text;
-    padding: 9px 25px;
+    padding: 9px 20px;
     transition: 0.3s;
     font-size: 1rem;
     font-weight: 500;
@@ -194,5 +206,4 @@ export default {
 .mobileMenuDisplayed {
     transform: translateY(0);
 }
-
 </style>
