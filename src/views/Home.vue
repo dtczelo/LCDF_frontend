@@ -3,16 +3,16 @@
         <TopBar></TopBar>
         <Header></Header>
         <div class="landing-page">
-            <img class="landing-page__logo" :class="{ mounted: isMounted }" src="../assets/images/logo/LCDF-Sans_texte.png" alt="" />
-            <img src="../assets/images/greenhouse.jpg" class="landing-page__cover-image" alt="" />
+            <img class="landing-page__logo" :class="{ mounted: isMounted }" src="../assets/images/logo/LCDF-Sans_texte.png" alt="Logo de la cuisine de François" />
+            <img src="../assets/images/greenhouse.jpg" class="landing-page__cover-image" alt="Serre de jardin" />
         </div>
-        <About></About>
         <Carousel></Carousel>
         <Menu></Menu>
+        <About></About>
         <Gallerie></Gallerie>
-        <a @click.prevent="backToTop()" :class="{ backToTopScrolled: isScrolled }" class="back-to-top"
+        <router-link to="#home" :class="{ backToTopScrolled: isScrolled }" class="back-to-top"
             ><i class="fas fa-chevron-circle-up"></i
-        ></a>
+        ></router-link>
         <Footer></Footer>
     </main>
 </template>
@@ -45,9 +45,6 @@ export default {
     },
     computed: {},
     methods: {
-        backToTop() {
-            window.scrollTo(0, 0);
-        },
         handleScroll() {
             if (window.scrollY > 800) {
                 this.isScrolled = true;
@@ -146,53 +143,6 @@ export default {
         }
     }
 }
-
-// .products {
-//     display: flex;
-//     flex-direction: column;
-//     & h2 {
-//         display: block;
-//         position: relative;
-//         font-size: 2.5rem;
-//         text-align: center;
-//         width: 50%;
-//         margin: 0;
-//         &::after {
-//             content: url(../assets/images/underline.png);
-//             position: relative;
-//             display: inline-block;
-//             top: 0;
-//             left: 0;
-//             width: 100%;
-//             height: 20px;
-//             transform: translateY(-38px);
-//         }
-//     }
-// }
-
-// .products__starter,
-// .products__dish,
-// .products__dessert {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-//     padding: 30px;
-//     margin: 20px;
-//     min-height: 30vh;
-// }
-
-// .products__cards {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: flex-start;
-//     // padding: 10px;
-// }
-
-// .products__card {
-//     display: block;
-//     width: 100%;
-// }
 
 /*--------------------------------------------------------------
 # Back to top button

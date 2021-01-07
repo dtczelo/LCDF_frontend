@@ -82,11 +82,11 @@ export default {
     height: 70px;
     z-index: 997;
     transition: all 0.5s;
-    padding: 10px 0;
+    // padding: 10px 0;
 }
 
 .header-transparent {
-    background: transparent;
+    background: $head-background;
 }
 
 .headerScrolled {
@@ -185,7 +185,7 @@ export default {
         padding: 0;
     }
     & ul li {
-        margin-top: 5rem;
+        margin-top: 3.5rem;
     }
     & ul li a {
         font-size: 2.5rem;

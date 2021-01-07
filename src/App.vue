@@ -1,14 +1,10 @@
 <template>
     <div id="app">
-        <!-- <TopBar></TopBar>
-        <Header></Header> -->
         <router-view />
     </div>
 </template>
 
 <script>
-// import TopBar from "./components/TopBar";
-// import Header from "./components/Header";
 import { bus } from "./main";
 
 export default {
@@ -19,7 +15,7 @@ export default {
                 solid: true,
                 variant: payload.style,
                 autoHideDelay: 5000,
-                appendToast: false
+                appendToast: false,
             });
         });
     },
@@ -54,5 +50,22 @@ h4,
 h5,
 h6 {
     font-family: $font-bigTitle;
+}
+
+section {
+    padding: 50px 0;
+}
+
+// Transition Vue
+
+.slide-fade-enter-active {
+    transition: all 0.3s ease;
+}
+.slide-fade-leave-active {
+    transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter, .slide-fade-leave-to {
+    transform: translateX(10px);
+    opacity: 0;
 }
 </style>

@@ -37,7 +37,10 @@
                         <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
                             <i class="far fa-clock"></i>
                             <h4>Heures d'ouverture:</h4>
-                            <p>Lundi - Samedi:<br />11:00 - 23:00</p>
+                            <p>
+                                Lundi - Samedi:<br />11:30 - 14:30 <br />
+                                19:00 - 22:00
+                            </p>
                         </div>
 
                         <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
@@ -65,8 +68,8 @@
                                 placeholder="Votre nom"
                                 data-rule="minlen:4"
                                 data-msg="Please enter at least 4 chars"
+                                v-model="name"
                             />
-                            <div class="validate"></div>
                         </div>
                         <div class="col-md-6 form-group">
                             <input
@@ -77,8 +80,8 @@
                                 placeholder="Votre Email"
                                 data-rule="email"
                                 data-msg="Please enter a valid email"
+                                v-model="email"
                             />
-                            <div class="validate"></div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -90,8 +93,8 @@
                             placeholder="Sujet"
                             data-rule="minlen:4"
                             data-msg="Please enter at least 8 chars of subject"
+                            v-model="subject"
                         />
-                        <div class="validate"></div>
                     </div>
                     <div class="form-group">
                         <textarea
@@ -101,15 +104,10 @@
                             data-rule="required"
                             data-msg="Please write something for us"
                             placeholder="Message"
+                            v-model="message"
                         ></textarea>
-                        <div class="validate"></div>
                     </div>
-                    <div class="mb-3">
-                        <div class="loading">Chargement</div>
-                        <div class="error-message"></div>
-                        <div class="sent-message">Votre message a été envoyé. Merci !</div>
-                    </div>
-                    <div class="text-center"><button type="submit" @click.prevent="postForm(data)">Envoyer</button></div>
+                    <div class="text-center"><button type="submit" @click.prevent="postForm">Envoyer</button></div>
                 </form>
             </div>
         </section>
@@ -126,13 +124,33 @@
 </template>
 
 <script>
+// import { bus } from "../main";
+import axios from "axios";
+
 export default {
     data() {
-        return {};
+        return {
+            name: "",
+            email: "",
+            subject: "",
+            message: "",
+        };
     },
     methods: {
-        postForm(data) {
-            console.log(data);
+        postForm() {
+            axios
+                .post("http://localhost:3000/products/", {
+                        name: this.name,
+                        email: this.email,
+                        subject: this.subject,
+                        message: this.message,
+                })
+                .then(function(response) {
+                    console.log(response);
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
         },
     },
 };
@@ -207,31 +225,6 @@ export default {
     font-size: 13px;
 }
 
-.contact .email-form .error-message {
-    display: none;
-    color: #fff;
-    background: #ed3c0d;
-    text-align: center;
-    padding: 15px;
-    font-weight: 600;
-}
-
-.contact .email-form .sent-message {
-    display: none;
-    color: #fff;
-    background: #18d26e;
-    text-align: center;
-    padding: 15px;
-    font-weight: 600;
-}
-
-.contact .email-form .loading {
-    display: none;
-    background: #fff;
-    text-align: center;
-    padding: 15px;
-}
-
 .contact .email-form .loading:before {
     content: "";
     display: inline-block;
@@ -275,24 +268,6 @@ export default {
 
 .contact h2 span {
     color: $third-color;
-}
-
-@-webkit-keyframes animate-loading {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes animate-loading {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
 }
 
 /*--------------------------------------------------------------

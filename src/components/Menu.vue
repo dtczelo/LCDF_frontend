@@ -15,79 +15,35 @@
                 </div>
             </div>
             <div class="row menu-container">
-                <div class="col-lg-12 menu-item" v-if="current == 0">
-                    <div v-for="product in listOfLeCoinVegan" :key="product.categories">
-                        <Product :title="product.title" :description="product.description" :price="product.price"></Product>
+                <transition name="slide-fade" mode="out-in">
+                    <div class="col-lg-12 menu-item" v-if="current == 0" key="nouv">
+                        <div v-for="product in listOfNouveaute" :key="product._id">
+                            <Product :title="product.title" :description="product.description" :price="product.price"></Product>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-12 menu-item" v-if="current == 1">
-                    <div v-for="product in listOfNosSpécialités" :key="product.categories">
-                        <Product :title="product.title" :description="product.description" :price="product.price"></Product>
+                    <div class="col-lg-12 menu-item" v-if="current == 1" key="veg">
+                        <div v-for="product in listOfLeCoinVegan" :key="product._id">
+                            <Product :title="product.title" :description="product.description" :price="product.price"></Product>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-12 menu-item" v-if="current == 2">
-                    <div v-for="product in listOfDesserts" :key="product.categories">
-                        <Product :title="product.title" :description="product.description" :price="product.price"></Product>
+                    <div class="col-lg-12 menu-item" v-if="current == 2" key="spe">
+                        <div v-for="product in listOfNosSpécialités" :key="product._id">
+                            <Product :title="product.title" :description="product.description" :price="product.price"></Product>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-12 menu-item" v-if="current == 3">
-                    <div v-for="product in listOfSofts" :key="product.categories">
-                        <Product :title="product.title" :description="product.description" :price="product.price"></Product>
+                    <div class="col-lg-12 menu-item" v-if="current == 3" key="des">
+                        <div v-for="product in listOfDesserts" :key="product._id">
+                            <Product :title="product.title" :description="product.description" :price="product.price"></Product>
+                        </div>
                     </div>
-                </div>
+                    <div class="col-lg-12 menu-item" v-if="current == 4" key="sof">
+                        <div v-for="product in listOfSofts" :key="product._id">
+                            <Product :title="product.title" :description="product.description" :price="product.price"></Product>
+                        </div>
+                    </div>
+                </transition>
             </div>
         </div>
-
-        <!-- <div class="products">
-            <section class="products__starter">
-                <h2>Entrées</h2>
-                <div class="products__cards" v-if="listOfStarters.length > 0">
-                    <div class="products__card" v-for="product in listOfStarters" :key="product.categories">
-                        <Product
-                            :title="product.title"
-                            :description="product.description"
-                            :price="product.price"
-                            :diets="product.diet"
-                        ></Product>
-                    </div>
-                </div>
-                <div class="products__else" v-else>
-                    Nous vous prions de nous excuser, nous n'avons aucune entrée à vous proposer en ce moment !
-                </div>
-            </section>
-            <section class="products__dish">
-                <h2>Plats</h2>
-                <div class="products__cards" v-if="listOfDishes.length > 0">
-                    <div class="products__card" v-for="product in listOfDishes" :key="product.categories">
-                        <Product
-                            :title="product.title"
-                            :description="product.description"
-                            :price="product.price"
-                            :diets="product.diet"
-                        ></Product>
-                    </div>
-                </div>
-                <div class="products__else" v-else>
-                    Nous vous prions de nous excuser, nous n'avons aucun plats à vous proposer en ce moment !
-                </div>
-            </section>
-            <section class="products__dessert">
-                <h2>Desserts</h2>
-                <div class="products__cards" v-if="listOfDesserts.length > 0">
-                    <div class="products__card" v-for="product in listOfDesserts" :key="product.categories">
-                        <Product
-                            :title="product.title"
-                            :description="product.description"
-                            :price="product.price"
-                            :diets="product.diet"
-                        ></Product>
-                    </div>
-                </div>
-                <div class="products__else" v-else>
-                    Nous vous prions de nous excuser, nous n'avons aucun desserts à vous proposer en ce moment !
-                </div>
-            </section>
-        </div> -->
     </section>
 </template>
 
@@ -101,7 +57,8 @@ export default {
     data() {
         return {
             current: 0,
-            flters: ["Le coin végan", "Nos spécialités", "Desserts", "Softs"],
+            flters: ["Nouveautées", "Le coin végan", "Nos spécialités", "Desserts", "Softs"],
+            listOfNouveaute: [],
             listOfLeCoinVegan: [],
             listOfNosSpécialités: [],
             listOfDesserts: [],
@@ -112,6 +69,9 @@ export default {
         productFilteredByCategories: function(products) {
             return products.products.forEach((product) => {
                 switch (product.categories) {
+                    case "nouveaute":
+                        this.listOfNouveaute.push(product);
+                        break;
                     case "leCoinVegan":
                         this.listOfLeCoinVegan.push(product);
                         break;

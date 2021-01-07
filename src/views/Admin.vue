@@ -1,6 +1,12 @@
 <template>
     <div class="container-fluid">
-        <div v-if="formIsDisplayed" class="row justify-content-end">
+        <div v-if="formIsDisplayed" class="row justify-content-end p-3">
+            <div class="logo mr-auto">
+                <h1 class="text-light">
+                    <router-link style="text-decoration: none;" to="/"
+                        >La cuisine de François</router-link>
+                </h1>
+            </div>
             <div class="col-3">
                 <button class="btn btn-dark mb-3 mt-3" @click="logout">Déconnexion</button>
             </div>
@@ -33,11 +39,11 @@
                     <div class="col-2">
                         <fieldset>
                             <div class="form-check">
-                                <input type="radio" name="categories" id="nouveaute" value="nouveaute" v-model="categories"/>
+                                <input type="radio" name="categories" id="nouveaute" value="nouveaute" v-model="categories" />
                                 <label class="form-label" for="nouveaute">Nouveautées</label>
                             </div>
                             <div class="form-check">
-                                <input type="radio" name="categories" id="leCoinVegan" value="leCoinVegan" v-model="categories"/>
+                                <input type="radio" name="categories" id="leCoinVegan" value="leCoinVegan" v-model="categories" />
                                 <label class="form-label" for="leCoinVegan">Le coin Végan</label>
                             </div>
                             <div class="form-check">
@@ -81,9 +87,14 @@
             </form>
 
             <div class="d-flex justify-content-center row row-cols-1 row-cols-md-3 g-4">
-                <div class="card text-white bg-dark mb-3" style="max-width: 18rem;" v-for="product in listOfNewProducts" :key="product.title">
+                <div
+                    class="card text-white bg-dark mb-3"
+                    style="max-width: 18rem;"
+                    v-for="product in listOfNewProducts"
+                    :key="product.title"
+                >
                     <div class="card text-white bg-dark mb-3">
-                        <img :src="product.imageUrl" class="card-img-top"/>
+                        <img :src="product.imageUrl" class="card-img-top" />
                         <div class="card-body">
                             <p class="card-title">{{ product.title }}</p>
                             <p class="card-text">{{ product.description }}.......{{ product.price }}</p>
@@ -221,7 +232,7 @@ export default {
                 .catch((error) => console.error(error));
         },
         postProducts() {
-            if (!this.title || !this.description || !this.categories || !this.price || !this.image) {
+            if (!this.title || !this.description || !this.categories || !this.price) {
                 bus.$emit("toastr", { title: "Attention", message: "Veuillez compléter les champs requis !", style: "warning" });
                 return (this.valid = false);
             }
@@ -234,7 +245,9 @@ export default {
             form.append("description", this.description);
             form.append("price", this.price);
             form.append("categories", this.categories);
-            form.append("file", this.image);
+            if (this.categories === "nouveaute") {
+                form.append("file", this.image);
+            }
             // diets: dietsArray
             fetch("http://localhost:3000/products/", {
                 method: "POST",
@@ -261,9 +274,9 @@ export default {
                 .then((products) => {
                     products.products.forEach((product) => {
                         if (product.categories !== "nouveaute") {
-                            this.listOfProducts.push(product)
+                            this.listOfProducts.push(product);
                         } else {
-                            this.listOfNewProducts.push(product)
+                            this.listOfNewProducts.push(product);
                         }
                     });
                 })
